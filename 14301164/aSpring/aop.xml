@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    
+	<bean id="PrintBeforeAdvice" class="testaop.PrintBeforeAdvice"/>
+	<bean id="fooTarget" class="testaop.FooImpl"/>
+    <bean id="myAdvice" class="support.aAdvisor">  
+        <property name="advice" ref="PrintBeforeAdvice"></property>  
+        <property name="mappedName" value="dummyFoo"></property>
+    </bean>  
+    
+    <bean id="foo" class="framework.ProxyFactoryBean">
+     <property name="proxyInterfaces" value="testaop.FooInterface"></property>
+     <property name="target" ref="fooTarget"></property>
+     <property name="interceptorNames" value="myAdvice"></property>
+    </bean>
+  </beans>
